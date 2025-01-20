@@ -14,6 +14,7 @@ import {Observable, of} from 'rxjs';
 import {AuthService} from '../service/auth.service';
 import {switchMap} from 'rxjs/operators';
 
+
 @Injectable({
   providedIn: 'root',
 })
@@ -39,7 +40,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
    */
   canActivate(route: ActivatedRouteSnapshot,
               state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const redirectUrl = state.url === '/auth' ? '/' : state.url;
+    const redirectUrl = state.url === '/sign-out' ? '/' : state.url;
     return this._check(redirectUrl);
     return true;
   }
@@ -57,7 +58,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
   canActivateChild(childRoute: ActivatedRouteSnapshot,
                    state: RouterStateSnapshot): Observable<boolean
     | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    const redirectUrl = state.url === '/auth' ? '/' : state.url;
+    const redirectUrl = state.url === '/sign-out' ? '/' : state.url;
     return this._check(redirectUrl);
     return true;
   }
@@ -69,7 +70,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
    * @param segments
    */
   canLoad(route: Route, segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
-    return this._check('/auth');
+    return this._check('/');
     return true;
   }
 
@@ -88,7 +89,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           // If the user is not authenticated...
           if (!authenticated) {
             // Redirect to the sign-in page
-            this._router.navigate(['/forms/form-control']);
+            this._router.navigate(['auth']);
 
             // Prevent the access
             return of(false);
@@ -96,7 +97,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
 
           // Allow the access
           return of(true);
-         }),
+        }),
       );
   }
 }
