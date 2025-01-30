@@ -1,23 +1,15 @@
-/**
- * @license
- * Copyright Akveo. All Rights Reserved.
- * Licensed under the MIT License. See License.txt in the project root for license information.
- */
 import { Component, OnInit } from '@angular/core';
-import { AnalyticsService } from './@core/utils/analytics.service';
-import { SeoService } from './@core/utils/seo.service';
+import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
-  selector: 'ngx-app',
-  template: '<router-outlet></router-outlet>',
+    selector: 'app-root',
+    templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
 
-  constructor(private analytics: AnalyticsService, private seoService: SeoService) {
-  }
+    constructor(private primengConfig: PrimeNGConfig) { }
 
-  ngOnInit(): void {
-    this.analytics.trackPageViews();
-    this.seoService.trackCanonicalChanges();
-  }
+    ngOnInit() {
+        this.primengConfig.ripple = true;
+    }
 }

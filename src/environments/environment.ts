@@ -14,6 +14,8 @@ export const environment = {
   domain    : 'localhost',
   catering      : {
     baseApiEndPoint        : 'http://localhost:8081/',
+    apiEndPoint        : 'api/',
+    moduleUser         : 'user/',
     reportUrl : '',
   },
 };
